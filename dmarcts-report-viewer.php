@@ -190,18 +190,7 @@ function tmpl_reportData($reportnumber, $allowed_reports, $host_lookup = 1, $sor
 function tmpl_page ($body, $reportid, $host_lookup = 1, $sort_order, $dom_select, $domains = array(),$cssfile, $org_select, $orgs = array(), $per_select, $periods = array() ) {
 
 	$html       = array();
-        $url_hswitch = ( $reportid ? "?report=$reportid&hostlookup=" : "?hostlookup=" )
-                . ($host_lookup ? "0" : "1" )
-                . ( "&sortorder=" ) . ($sort_order)
-                . (isset($dom_select) && $dom_select <> "" ? "&d=$dom_select" : "" )
-                ;
-        $url_dswitch = "?hostlookup=" . ($host_lookup ? "1" : "0" ) . "&sortorder=" . ($sort_order); // drop selected report on domain switch
-        $url_sswitch = ( $reportid ? "?report=$reportid&hostlookup=" : "?hostlookup=" )
-                . ($host_lookup)
-                . ( "&sortorder=" ) . ($sort_order ? "0" : "1" )
-                . (isset($dom_select) && $dom_select <> "" ? "&d=$dom_select" : "" )
-                ;
-
+        
 	$html[] = "<!DOCTYPE html>";
 	$html[] = "<html>";
 	$html[] = "  <head>";
@@ -245,8 +234,8 @@ function tmpl_page ($body, $reportid, $host_lookup = 1, $sort_order, $dom_select
       $html[] = "<option $arg value=\"$d\">$d</option>";
     }
     $html[] = "</select>";
+    $html[] = "</div>";
   }
-  $html[] = "</div>";
 
 
   # handle orgs
@@ -267,8 +256,8 @@ function tmpl_page ($body, $reportid, $host_lookup = 1, $sort_order, $dom_select
       $html[] = "<option $arg value=\"$o\">" . ( strlen( $o ) > 25 ? substr( $o, 0, 22) . "..." : $o ) . "</option>";
     }
     $html[] = "</select>";
+    $html[] = "</div>";
   }
-  $html[] = "</div>";
   
   
   #--------------------------------------------------------------------------
@@ -290,8 +279,8 @@ function tmpl_page ($body, $reportid, $host_lookup = 1, $sort_order, $dom_select
       $html[] = "<option $arg value=\"$p\">$p</option>";
     }
     $html[] = "</select>";
+    $html[] = "</div>";
   }
-  $html[] = "</div>";
   
   
   # end optionblock
